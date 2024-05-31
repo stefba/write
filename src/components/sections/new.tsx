@@ -2,13 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { TextField } from '../text';
 import { makeKey } from '../../funcs/date';
 import Text, { emptyText } from '../../funcs/text';
-import { ModFuncs } from '../../helper';
+import useWriteStates from 'state';
 
-type NewTextProps = {
-    modFuncs: ModFuncs;
-}
-
-function NewText({modFuncs}: NewTextProps) {
+function NewText() {
+    const { saveText } = useWriteStates();
     const [newText, setNewText] = useState(emptyText());
 
     useEffect(() => {
@@ -29,8 +26,8 @@ function NewText({modFuncs}: NewTextProps) {
     }, []);
 
     function save(t: Text) {
-        modFuncs.saveText(t);
-        setNewText(emptyText());
+        saveText(t);
+        //setNewText(emptyText());
     }
 
     return (

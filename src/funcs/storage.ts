@@ -1,22 +1,42 @@
 import Text from './text';
 
-export function readState(key: string): Text[] {
-    const list = localStorage.getItem(key);
-    if (list == null || list === "{}") {
-        return [];
+export interface WriteStates {
+    [index: string]: Text[]
+}
+
+function newWriteStates(): WriteStates {
+    return {
+        //"texts": [{id: "1", path: "string", body: "asdiodaios", mod: 1221, firstEdit: false }],
+        "texts": [],
+        "writes": [],
+        "deletes": [],
     }
-    let texts: Text[] = [];
+}
+
+export function readWriteStates(): WriteStates {
+    //let texts: WriteStates = {}
+    let states = newWriteStates()
+    const list = localStorage.getItem("write_state");
+    if (list == null || list === "{}") {
+        return states;
+    }
     try {
-        texts = JSON.parse(list);
+        states = JSON.parse(list);
     } catch(err) {
         throw err;
     }
-    return texts;
+    return states;
 }
 
+export function storeWriteStates(w: WriteStates) {
+    localStorage.setItem("write_state", JSON.stringify(w))
+}
+
+/*
 export function storeState(key: string, list: Text[]) {
     localStorage.setItem(key, JSON.stringify(list));
 }
+*/
 
 export function storeBoolState(key: string, state: boolean) {
     localStorage.setItem(key, String(state));

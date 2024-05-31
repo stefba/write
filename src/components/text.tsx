@@ -94,9 +94,11 @@ export function TextField({ text, saveFn, delFn, isSingle, isNew }: TextProps) {
     const placeText = (): void => {
         if (body === '') return
         save();
+        /*
         if (isNew) {
             navigate("/texts/" + text.id + ".txt")
         }
+        */
     }
 
     const placeGoToNew = (): void => {

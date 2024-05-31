@@ -9,7 +9,6 @@ export type ModFuncs = {
 
 export type SectionProps = {
     texts: Text[];
-    modFuncs: ModFuncs;
 }
 
 export type conStatesObj = {

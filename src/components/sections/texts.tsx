@@ -2,9 +2,11 @@ import React from 'react';
 
 import { TextList } from '../text';
 import { SectionProps } from '../../helper';
+import useWriteStates from 'state';
 
-function Texts({texts, modFuncs}: SectionProps) {
-    return <TextList texts={texts} saveFn={modFuncs.saveText} delFn={modFuncs.deleteText} />
+function Texts({texts}: SectionProps) {
+    const { deleteText, saveText } = useWriteStates();
+    return <TextList texts={texts} saveFn={saveText} delFn={deleteText} />
 }
 
 export default Texts;
